@@ -16,3 +16,8 @@ This tool can be helpful for learners of Quranic recitation, students of tafsir,
 6. **Show English translation** and **Arabic tafsir**.
 7. **Use local JSON files** for fast lookup and offline access.
 
+## For the Ummah
+Made with ❤️ by a Muslim developer for Islamic education and da'wah.
+
+  "وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا" — Surah Al-Muzzammil (73:4)
+
