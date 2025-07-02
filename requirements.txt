@@ -2,7 +2,6 @@ streamlit
 openai-whisper
 sounddevice
 scipy
-requests
 rapidfuzz
 torch
 base64
