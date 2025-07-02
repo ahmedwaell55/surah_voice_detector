@@ -2,9 +2,10 @@ import streamlit as st
 from transcribe import transcribe_audio
 from match_verse import find_best_match
 from quran_api import get_tafsir, get_translation
-
+from PIL import Image
 import sounddevice as sd
 from scipy.io.wavfile import write
+import base64
 
 #removing hamburger 
 hide_menu_style = """
@@ -14,6 +15,22 @@ hide_menu_style = """
         </style>
         """
 st.markdown(hide_menu_style, unsafe_allow_html=True)
+
+logo = Image.open("photo.png")
+
+# Convert image to base64 to embed with HTML
+with open("photo.png", "rb") as image_file:
+    encoded = base64.b64encode(image_file.read()).decode()
+
+# Use HTML to center the image
+st.markdown(
+    f"""
+    <div style="text-align: center;">
+        <img src="data:image/png;base64,{encoded}" width="300">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # Session state
 if "recording" not in st.session_state:
@@ -26,7 +43,6 @@ st.markdown("<hr>", unsafe_allow_html=True)
 # Upload Section
 st.subheader("📤 Upload Your Recitation (.wav)")
 audio_file = st.file_uploader("", type=["wav"])
-st.audio("temp.wav", format="audio/wav")
 if audio_file:
     with open("temp.wav", "wb") as f:
         f.write(audio_file.read())
@@ -76,7 +92,6 @@ else:
         fs = 16000
         duration = 10
         recording = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype='int16')
-        st.audio("live_input.wav", format="audio/wav")
         sd.wait()
         write("live_input.wav", fs, recording)
         st.success("✅ Recording saved!")
